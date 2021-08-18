@@ -88,9 +88,9 @@ class Akismet_Plugin implements Typecho_Plugin_Interface
             'blog' => $options->siteUrl
         );
 
-        $re = self::send_post($url . '/1.1/verify-key', $data);
+        $res = self::send_post($url . '/1.1/verify-key', $data);
 
-        if ('valid' == $re) {
+        if ('valid' == $res) {
             return true;
         } else {
             return false;
@@ -189,8 +189,8 @@ class Akismet_Plugin implements Typecho_Plugin_Interface
             if ($key) {
                 $params = parse_url($url);
                 $url = $params['scheme'] . '://' . $key . '.' . $params['host'] . ($params['path'] ?? NULL);
-                $re = self::send_post($url . '/1.1/' . $api, $data);
-                if ('true' == $re) {
+                $res = self::send_post($url . '/1.1/' . $api, $data);
+                if ('true' == $res) {
                     $comment['status'] = 'spam';
                 }
             }
